@@ -1,0 +1,42 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Search a movie</title>
+</head>
+<body>
+    <h1>Search by : </h1>
+
+    <form action="SearchByCategory" method="post">
+        Movie category : <input id="Text1" type="text" name="MovieCategory" />
+        <input id="Submit1" type="submit" value="Search" />
+    </form>
+
+    <form action="SearchByTime" method="post">
+        Movie time : <input id="Text1" type="time" name="MovieTime" />
+        <input id="Submit1" type="submit" value="Search" />
+    </form>
+
+    <form action="SearchByDate" method="post">
+        Movie date : <input id="Text1" type="date" name="MovieDate" />
+        <input id="Submit1" type="submit" value="Search" />
+    </form>
+
+    <form action="SearchByPrice" method="post">
+        Price range :
+        <input type="range" id="rangeInput" name="rangeInput" min="0" max="1000" value="0"
+               oninput="amount.value=rangeInput.value">
+        <output id="amount" name="amount" for="rangeInput">0</output>
+        <input id="Submit1" type="submit" value="Search" />
+    </form>
+    <a href="@Url.Action("ShowHowPage", "User")">
+        <span> return to home page</span>
+    </a>
+</body>
+</html>

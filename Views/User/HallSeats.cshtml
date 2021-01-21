@@ -1,0 +1,49 @@
+﻿@using MoviesBooking.Models
+@model MoviesBooking.ViewModel.SeatsViewModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <style>
+        table,
+        th,
+        td {
+            padding: 10px;
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+    </style>
+    <meta name="viewport" content="width=device-width" />
+    <title>Hall Seats</title>
+</head>
+<body>
+    <h2>Movie Name : @Model.movie.title</h2>
+    <h3>Take Place in Hall id : @Model.hall.hallId</h3>
+    <h3>Total Seats : @Model.hall.seatsNumber</h3>
+    <form action="CreatTicket" method="post">
+        <label for="browser">Select Your Seat:</label>
+        <select name="SeatNumber">
+            @{
+                var list1 = Enumerable.Range(1, Model.hall.seatsNumber).ToList();
+                var list2 = (from x in Model.tickets
+                             select x.seatNumber).ToList<int>();
+                var list3 = list1.Except(list2).ToList();
+                foreach (int n in list3)
+                {
+                    <option>@n</option>
+                }
+            }
+        </select>
+        <input type="submit" value="Add to cart">
+        <button name="ticketId1" formaction=@Url.Action("BuyBefore") formmethod="post"> Buy</button>
+    </form>
+    <a href="@Url.Action("ShowHowPage", "User")">
+        <span>Home page</span>
+    </a>
+
+</body>
+</html>

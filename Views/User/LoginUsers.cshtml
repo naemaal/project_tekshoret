@@ -1,0 +1,36 @@
+﻿@model MoviesBooking.Models.User
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>LoginUsers</title>
+</head>
+<body>
+    <h1> Login for users and admins </h1>
+    <form action="SingIn" method="post">
+
+        User Name : <input id="Text1" type="text" name="userName" required />
+        <br />
+        Password : <input id="Text1" type="password" name="password" required />
+        <br />
+        <input id="Submit1" type="submit" value="submit" />
+    </form>
+    <a href="@Url.Action("RegisterUsers", "User")">
+        <span>Register page </span>
+    </a>
+    <br />
+    <a href="@Url.Action("ShowHowPage", "User")">
+        <span>Home page </span>
+    </a>
+    @if (TempData["msg"] != null)
+    {
+        <h4 style="color:@TempData["color"];"> @TempData["msg"] </h4>
+    }
+</body>
+</html>

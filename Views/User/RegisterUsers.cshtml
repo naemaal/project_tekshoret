@@ -1,0 +1,38 @@
+﻿@model MoviesBooking.Models.User
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Register Users</title>
+</head>
+<body>
+    <h1> Register for users and admins </h1>
+    <form action="AddNewUser" method="post">
+
+        User Name : <input id="Text1" type="text" name="userName" required />
+        <br />
+        Password : <input id="Text1" type="password" name="password" required />
+        <br />
+        Age : <input id="Text1" type="number" min="0" name="age" required />
+        <br />
+        Creat admin account ?
+        <input type="radio" name="userType" value="A">Yes
+        <input type="radio" name="userType" value="U">No
+        <br />
+        <input id="Submit1" type="submit" value="submit" />
+    </form>
+    <a href="@Url.Action("LoginUsers", "User")">
+        <span> Login page </span>
+    </a>
+    @if (TempData["msg"] != null)
+    {
+        <h4 style="color:@TempData["color"];"> @TempData["msg"] </h4>
+    }
+</body>
+</html>

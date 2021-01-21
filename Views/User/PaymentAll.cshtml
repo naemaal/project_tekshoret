@@ -1,0 +1,31 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Payment all tickets</title>
+</head>
+<body>
+    <div>
+        <h1> Enter payment information </h1>
+        <form action="BuyAllTickets" method="post">
+            Visa's owner name :<input id="Text1" type="text" required/>
+            <br />
+            Visa type :<input id="Text1" type="text" required />
+            <br />
+            Visa number :<input id="Text1" type="text" required/>
+            <br />
+            <input id="Submit1" type="submit" value="purchase" />
+        </form>
+
+    </div>
+    <a href="@Url.Action("Cart", "User")">
+        <span>Cart page</span>
+    </a>
+</body>
+</html>

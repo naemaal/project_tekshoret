@@ -1,0 +1,43 @@
+﻿@model MoviesBooking.Models.Hall
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Managing Halls</title>
+</head>
+<body>
+    @if (TempData["msg"] != null)
+    {
+        <h4 style="color:@TempData["color"];"> @TempData["msg"] </h4>
+    }
+
+    <form action="AddHall" method="post">
+        <h1>Add a new Hall</h1>
+        <br />
+        Hall id : <input id="Text1" name="hallId" type="number" required />
+        <br />
+        Number of seats : <input id="Text1" name="seatsNumber" type="number" required />
+        <br />
+        <input id="Submit1" type="submit" value="Add" />
+    </form>
+
+    <form action="UpdateHallSeats" method="post">
+        <h1>Change Hall's seats number</h1>
+        <br />
+        Hall id : <input id="Text1" name="hallId" type="number" required />
+        <br />
+        Number of seats (new) : <input id="Text1" name="seatsNumber" type="number" required />
+        <br />
+        <input id="Submit1" type="submit" value="Change" />
+    </form>
+    <a href="@Url.Action("MangmentMovies", "Admin")">
+        <span> return to admin page</span>
+    </a>
+</body>
+</html>

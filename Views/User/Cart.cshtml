@@ -1,0 +1,79 @@
+﻿@model MoviesBooking.ViewModel.TicketViewModel
+@using MoviesBooking.Models
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Cart</title>
+    <style>
+        table,
+        th,
+        td {
+            padding: 10px;
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+    </style>
+</head>
+<body>
+    @if (TempData["msg"] != null)
+    {
+        <h4 style="color:@TempData["color"];"> @TempData["msg"] </h4>
+    }
+    <a href="@Url.Action("ShowHowPage", "User")">
+        <span>Home page</span>
+    </a>
+    <br />
+    <form action="PaymentAll" method="post">
+        @if (Model.tickets.Count != 0)
+        {
+            if (!Model.isAllPayed())
+            {
+            <input id="Submit1" type="submit" value="Buy all" />
+            } 
+        }
+            else
+            {
+            <input id="Submit1" type="submit" value="Buy all" disabled="true" />
+        }
+    </form>
+    <form action="" method="post">
+        <table>
+            <tr>
+                <th></th>
+                <th>Movie Name</th>
+                <th>Date </th>
+                <th>Time </th>
+                <th>Price </th>
+                <th>Seat Number</th>
+            </tr>
+            @foreach (Ticket ticket in Model.tickets)
+            {
+                <tr>
+                    @if (ticket.isPayed == false)
+                    {
+                        <td>
+                            <button name="ticketId1" value=@ticket.ticketId formaction=@Url.Action("Payment") formmethod="post"> Buy</button>
+                            <button name="ticketId2" value=@ticket.ticketId formaction=@Url.Action("ChangeSeat") formmethod="post"> Change seat number</button>
+                        </td>
+                    }
+                    else
+                    {
+                        <td>Paid</td>
+                    }
+                    <td>@Model.GetName(ticket.movieId)</td>
+                    <td>@Model.GetDate(ticket.movieId)</td>
+                    <td>@Model.GetTime(ticket.movieId) </td>
+                    <td>@Model.GetPrice(ticket.movieId)</td>
+                    <td>@ticket.seatNumber</td>
+                </tr>
+            }
+        </table>
+    </form>
+</body>
+</html>

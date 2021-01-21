@@ -1,0 +1,39 @@
+﻿@using MoviesBooking.Models
+@model MoviesBooking.ViewModel.SeatsViewModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>ChangeSeat</title>
+</head>
+<body>
+    <h2>Movie Name : @Model.movie.title</h2>
+    <h3>Take Place in Hall id : @Model.hall.hallId</h3>
+    <h3>Total Seats : @Model.hall.seatsNumber</h3>
+    <form action="UpdateTicket" method="post">
+        <label for="browser">Select Your Seat:</label>
+        <select name="SeatNumber">
+            @{
+                var list1 = Enumerable.Range(1, Model.hall.seatsNumber).ToList();
+                var list2 = (from x in Model.tickets
+                             select x.seatNumber).ToList<int>();
+                var list3 = list1.Except(list2).ToList();
+                foreach (int n in list3)
+                {
+                    <option>@n</option>
+                }
+            }
+        </select>
+        <input type="submit" value="Change">
+    </form>
+    <a href="@Url.Action("Cart", "User")">
+        <span>Back to cart page</span>
+    </a>
+
+</body>
+</html>

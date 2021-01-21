@@ -1,0 +1,106 @@
+﻿@using MoviesBooking.Models
+@model MoviesBooking.ViewModel.MovieViewModel
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <style>
+        table,
+        th,
+        td {
+            padding: 10px;
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+    </style>
+    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width" />
+    <title>ShowHowPage</title>
+</head>
+<body>
+    @if (TempData["msg"] != null)
+    {
+        <h4 style="color:@TempData["color"];"> @TempData["msg"] </h4>
+    }
+    <form action="FilterMovie" method="post">
+        Show only movies with the decreased price :
+        <input type="submit" value="Filter">
+    </form>
+    <form action="OrderMovies" method="post">
+        <label for="browser">Order by:</label>
+        <select name="OrderBy">
+            <option name="Choice1">Price increase</option>
+            <option name="Choice2">Price decrease</option>
+            <option name="Choice3">Most popular</option>
+            <option name="Choice3">Most popular</option>
+            <option name="Choice4">Category</option>
+        </select>
+        <input type="submit" value="order">
+    </form>
+    <form action="SearchMovie" method="post">
+        <input type="submit" value="Search a movie">
+    </form>
+
+    <br />
+    @{
+        if (Session["UserName"].ToString().Contains("??"))
+        {
+            <a href="@Url.Action("LoginUsers", "User")">
+                <span>Login page</span>
+            </a>
+        }
+        else
+        {
+            <a href="@Url.Action("SignOut", "User")">
+                <span style="color:red">Sign Out </span>
+            </a>
+        }
+    }
+
+    <br />
+    <a href="@Url.Action("Cart", "User")">
+        <span>Shopping cart</span>
+    </a>
+    <form action="" method="post">
+        <table>
+            <tr>
+                <th>Buy</th>
+                <th>Movie Name</th>
+                <th>Date </th>
+                <th>Time </th>
+                <th>Price </th>
+                <th>Allowed Age </th>
+                <th>Hall ID </th>
+                <th>Category</th>
+                <th>Movie Image </th>
+            </tr>
+            @foreach (Movie movie in Model.movies)
+            {
+                <tr>
+                    <td> <button name="movieId" value=@movie.movieId formaction=@Url.Action("HallSeats") formmethod="post"> Buy</button></td>
+                    <td>@movie.title</td>
+                    <td>@movie.date </td>
+                    <td>@movie.time </td>
+                    @if (movie.prePrice != 0)
+                    {
+                        <td> @movie.price   <s><br />@movie.prePrice</s>  </td>
+                    }
+                    else
+                    {
+                        <td>@movie.price  </td>
+                    }
+                    <td>@movie.age+</td>
+                    <td>@movie.hallId</td>
+                    <td>@movie.category</td>
+                    <td> <img src="@Url.Content(movie.ImageUrl)" height="100" width="100" /></td>
+                </tr>
+            }
+        </table>
+    </form>
+</body>
+</html>

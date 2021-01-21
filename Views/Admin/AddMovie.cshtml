@@ -1,0 +1,46 @@
+﻿@using MoviesBooking.Models
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Add Movie</title>
+</head>
+<body>
+    <form action="AddNewMovie" method="post" enctype="multipart/form-data">
+        <h1> Add a new movie </h1>
+        <br />
+        Movie name   :<input id="Text1" type="text" name="title" required />
+        <br />
+        Movie date   :<input id="dateText" type="date" name="date" required />
+        <br />
+        Movie time   :<input id="Text1" type="time" name="time" required />
+        <br />
+        Hall id      :<input id="Text1" type="number" min="1" name="hallId" required />
+        <br />
+        Movie price  :<input id="Text1" type="number" min="0" name="price" required />
+        <br />
+        Movie category  :<input id="Text1" type="text" name="category" required />
+        <br />
+        Age limitation      :<input id="Text1" type="number" min="0" name="age" required />
+        <br />
+        Movie image :<input id="Text1" type="file" name="image" required />
+        <br />
+        <input id="Submit1" type="submit" value="Add" />
+
+    </form>
+    <a href="@Url.Action("MangmentMovies", "Admin")">
+        <span> return to admin page</span>
+    </a>
+</body>
+</html>
+
+@if (TempData["msg"] != null)
+{
+    <h4 style="color:@TempData["color"];"> @TempData["msg"] </h4>
+}
+

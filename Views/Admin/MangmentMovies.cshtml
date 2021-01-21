@@ -1,0 +1,78 @@
+﻿@using MoviesBooking.Models
+@model MoviesBooking.ViewModel.MovieViewModel
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <style>
+        table,
+        th,
+        td {
+            padding: 10px;
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+    </style>
+    <meta name="viewport" content="width=device-width" />
+    <title>MangmentMovies</title>
+</head>
+<body>
+    @if (TempData["msg"] != null)
+    {
+        <h4 style="color:@TempData["color"];"> @TempData["msg"] </h4>
+    }
+    <form action="AddMovie" method="post">
+        <input id="Submit1" type="submit" value="Add movie" />
+    </form>
+    <form action="ManagingHalls" method="post">
+        <input id="Submit1" type="submit" value="Managing halls" />
+    </form>
+
+    <a href="@Url.Action("SignOut", "User")">
+        <span style="color:red">Sign Out </span>
+    </a>
+    
+    <form action="" method="post">
+        <table>
+            <tr>
+                <th>Movie Name</th>
+                <th>Date </th>
+                <th>Time </th>
+                <th>Price </th>
+                <th>Update Price </th>
+                <th>Hall ID </th>
+                <th>Update Hall ID </th>
+                <th>Remove Movie </th>
+            </tr>
+            @foreach (Movie movie in Model.movies)
+            {
+                <tr>
+                    <td>@movie.title</td>
+                    <td>@movie.date </td>
+                    <td>@movie.time </td>
+                    <td>@movie.price </td>
+                    <td>
+                        <input name="NewPrice" type="number" min="0" style="width: 50px;" />
+                        <button name="UpdatePrice" value=@movie.movieId formaction=@Url.Action("UpdatePrice") formmethod="post"> Submit</button>
+                    </td>
+                    <td>@movie.hallId</td>
+                    <td>
+                        <input name="NewHall" type="number" min="0" style="width: 50px;" />
+                        <button name="UpdateHall" value=@movie.movieId formaction=@Url.Action("UpdateHall") formmethod="post"> Submit</button>
+                    </td>
+                    <td>
+                        <button name="RemoveMovie" value=@movie.movieId formaction=@Url.Action("RemoveMovie") formmethod="post"> Remove</button>
+                    </td>
+                </tr>
+            }
+        </table>
+    </form>
+
+
+</body>
+</html>
